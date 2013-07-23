@@ -7,20 +7,20 @@
 
 #define MAX_WORD_LENGTH 10
 
-
 int main ( void ) 
 {
 	int input, i, j;
-	int word_histo[MAX_WORD_LENGTH - 1];
+	int word_histo[ MAX_WORD_LENGTH + 1 ];
 	int c_count = 0;
+	
 
-	for( i = 0; i < MAX_WORD_LENGTH; ++i ) 
+	for( i = 0; i <= MAX_WORD_LENGTH; ++i ) 
 	{
 		word_histo[i] = 0;
 	}
 	while ( ( input = getchar() ) != EOF )
 	{
-		if( input == ' ' || input == '\n' || input == '\t' ) 
+		if( input == ' ' || input == '\n' || input == '\t' || input == ',' ) 
 		{
 			if( c_count == 0 ) 
 			{
@@ -41,12 +41,39 @@ int main ( void )
 	}
 
 	putchar('\n');
-	for( i = 1; i < MAX_WORD_LENGTH; ++i ) 
+	for( i = 1; i <= MAX_WORD_LENGTH; ++i ) 
 	{
 		printf("%i ", i);
-		for ( j = 0; j < word_histo[ i ]; ++j ) 
+		for( j = 0; j < word_histo[ i ]; ++j ) 
 		{
 			putchar('.');
+		}
+		putchar('\n');
+	}
+
+
+	putchar('\n');
+	for( i = 1; i <= MAX_WORD_LENGTH; ++i ) 
+	{
+		printf("%i ", i );
+	}
+	putchar('\n');
+
+	int ready_to_finish = 0;
+	for( i = 1; ready_to_finish == 0; ++i) 
+	{
+		ready_to_finish = 1;
+		for( j = 1; j <= MAX_WORD_LENGTH; ++j ) 
+		{
+			if( i <= word_histo[ j ] ) 
+			{
+				printf(". ");
+				ready_to_finish = 0;
+			} 
+			else
+			{
+				printf("  ");
+			}
 		}
 		putchar('\n');
 	}
