@@ -15,21 +15,26 @@ int main( void )
 	int max;
 	char line[ MAXLINE ];	
 	char longest[ MAXLINE ];
+	int maxlen;
 	
-	max = 0;
+	max = maxlen = 0;
 	while( ( len = egetline(line, MAXLINE) ) > 0 ) 
 	{
 		if( len > max ) 
 		{
 			max = len;
+			if( len > maxlen )
+			{
+				maxlen = len;
+			}
 			copy(longest, line);
 		}
-		if( max > 0 ) 
-		{	// -1 to len to remove the \n
-			printf("Length of input is %i long.\n%s", len -1, longest);
-		}
-		return 0;
 	}
+	if( max > 0 ) 
+	{	// -1 to len to remove the \n
+		printf("\nLength of input is %i long.\n%s", maxlen -1, longest);
+	}
+	return 0;
 }
 
 int egetline( char s[], int lim)
